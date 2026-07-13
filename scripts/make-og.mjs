@@ -29,3 +29,16 @@ const svg = `
 
 await sharp(Buffer.from(svg)).png().toFile("public/og.png");
 console.log("Wrote public/og.png");
+
+// App icon (iOS home screen / bookmarks). Full-bleed navy; iOS rounds it.
+const iconSvg = `
+<svg xmlns="http://www.w3.org/2000/svg" width="180" height="180" viewBox="0 0 180 180">
+  <rect width="180" height="180" fill="#0f1e33" />
+  <text x="34" y="130" font-family="'Plus Jakarta Sans', Arial, sans-serif"
+        font-size="120" font-weight="800" fill="#ffffff">K</text>
+  <circle cx="140" cy="118" r="14" fill="#ff5a1f" />
+</svg>
+`;
+await sharp(Buffer.from(iconSvg)).png().toFile("public/apple-touch-icon.png");
+await sharp(Buffer.from(iconSvg)).resize(32, 32).png().toFile("public/favicon.png");
+console.log("Wrote public/apple-touch-icon.png and public/favicon.png");

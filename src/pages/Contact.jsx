@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { track } from "@vercel/analytics";
 import { motion, useReducedMotion } from "motion/react";
 import {
   EnvelopeSimple,
@@ -116,6 +117,7 @@ export default function Contact() {
       window.location.href = `mailto:contact@korvos.com.au?subject=${encodeURIComponent(
         subject
       )}&body=${encodeURIComponent(body)}`;
+      track("contact_submit", { method: "mailto" });
       setStatus("sent");
       return;
     }
@@ -139,7 +141,12 @@ export default function Contact() {
         }),
       });
       const data = await res.json();
-      setStatus(data.success ? "sent" : "error");
+      if (data.success) {
+        track("contact_submit", { method: "web3forms" });
+        setStatus("sent");
+      } else {
+        setStatus("error");
+      }
     } catch {
       setStatus("error");
     }

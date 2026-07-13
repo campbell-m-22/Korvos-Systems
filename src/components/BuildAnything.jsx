@@ -54,12 +54,7 @@ export default function BuildAnything() {
 
           <div className="relative z-10 max-w-[38ch]">
             <Reveal>
-              <p className="font-sans text-[15px] font-semibold text-accent-text">
-                The one-off part is the point
-              </p>
-            </Reveal>
-            <Reveal delay={0.06}>
-              <h2 className="mt-4 font-display text-4xl font-extrabold leading-[1.05] tracking-tight text-navy sm:text-5xl lg:text-[56px]">
+              <h2 className="font-display text-4xl font-extrabold leading-[1.05] tracking-tight text-navy sm:text-5xl lg:text-[56px]">
                 You&rsquo;ve got a problem. We&rsquo;ll build the answer.
               </h2>
             </Reveal>

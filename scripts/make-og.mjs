@@ -30,13 +30,15 @@ const svg = `
 await sharp(Buffer.from(svg)).png().toFile("public/og.png");
 console.log("Wrote public/og.png");
 
-// App icon (iOS home screen / bookmarks). Navy with a centred white K to match
-// the parent Korvos favicon. Full-bleed; iOS rounds it.
+// Opaque tile icons (iOS home screen + legacy fallback). Transparent doesn't
+// work for these (iOS turns it black; a white K vanishes on light tabs), so
+// they use a navy tile with the white "K." mark.
 const iconSvg = `
 <svg xmlns="http://www.w3.org/2000/svg" width="180" height="180" viewBox="0 0 180 180">
   <rect width="180" height="180" fill="#0f1e33" />
-  <text x="90" y="134" text-anchor="middle" font-family="'Plus Jakarta Sans', Arial, sans-serif"
+  <text x="30" y="132" font-family="'Plus Jakarta Sans', Arial, sans-serif"
         font-size="132" font-weight="800" fill="#ffffff">K</text>
+  <circle cx="140" cy="120" r="15" fill="#ff5a1f" />
 </svg>
 `;
 await sharp(Buffer.from(iconSvg)).png().toFile("public/apple-touch-icon.png");

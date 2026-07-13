@@ -1,4 +1,11 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
-  <rect width="32" height="32" rx="6" fill="#0f1e33" />
-  <text x="16" y="23.5" text-anchor="middle" font-family="'Plus Jakarta Sans', Arial, sans-serif" font-size="23" font-weight="800" fill="#ffffff">K</text>
+  <!-- Transparent background, matching the parent Korvos mark.
+       The K is white on dark browser tabs and navy on light tabs so it never
+       vanishes; the dot is the Korvos Systems orange (parent uses teal). -->
+  <style>
+    .k { fill: #0f1e33; }
+    @media (prefers-color-scheme: dark) { .k { fill: #ffffff; } }
+  </style>
+  <text class="k" x="0.5" y="25.5" font-family="'Plus Jakarta Sans', Arial, sans-serif" font-size="30" font-weight="800">K</text>
+  <circle cx="27" cy="23" r="3.4" fill="#ff5a1f" />
 </svg>

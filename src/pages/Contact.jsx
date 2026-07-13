@@ -13,6 +13,13 @@ import Footer from "../components/Footer.jsx";
 
 const EASE = [0.16, 1, 0.3, 1];
 
+// Web3Forms delivers submissions straight to an inbox with no server to run.
+// Generate a free key at https://web3forms.com (enter contact@korvos.com.au as
+// the destination) and paste it below. Until it's set, the form falls back to
+// opening the visitor's email client, so nothing is broken in the meantime.
+const ACCESS_KEY = "YOUR_WEB3FORMS_ACCESS_KEY";
+const HAS_KEY = ACCESS_KEY && !ACCESS_KEY.startsWith("YOUR_");
+
 const DETAILS = [
   { icon: EnvelopeSimple, label: "Email", value: "contact@korvos.com.au", href: "mailto:contact@korvos.com.au" },
   { icon: Clock, label: "Reply time", value: "Within one business day, AEST" },
@@ -68,7 +75,7 @@ export default function Contact() {
     website: "", // honeypot
   });
   const [errors, setErrors] = useState({});
-  const [sent, setSent] = useState(false);
+  const [status, setStatus] = useState("idle"); // idle | sending | sent | error
 
   const update = (e) =>
     setForm((f) => ({ ...f, [e.target.name]: e.target.value }));
@@ -84,29 +91,58 @@ export default function Contact() {
     return er;
   }
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
     if (form.website) {
-      setSent(true); // honeypot tripped: silently "succeed"
+      setStatus("sent"); // honeypot tripped: silently "succeed"
       return;
     }
     const er = validate();
     setErrors(er);
     if (Object.keys(er).length) return;
 
-    const subject = `New enquiry from ${form.name} — Korvos Systems`;
-    const body = [
-      `Name: ${form.name}`,
-      `Email: ${form.email}`,
-      `Business: ${form.business || "-"}`,
-      `Phone: ${form.phone || "-"}`,
-      "",
-      form.message,
-    ].join("\n");
-    window.location.href = `mailto:contact@korvos.com.au?subject=${encodeURIComponent(
-      subject
-    )}&body=${encodeURIComponent(body)}`;
-    setSent(true);
+    const subject = `New enquiry from ${form.name} - Korvos Systems`;
+
+    // No key yet: fall back to the visitor's email client (still works today).
+    if (!HAS_KEY) {
+      const body = [
+        `Name: ${form.name}`,
+        `Email: ${form.email}`,
+        `Business: ${form.business || "-"}`,
+        `Phone: ${form.phone || "-"}`,
+        "",
+        form.message,
+      ].join("\n");
+      window.location.href = `mailto:contact@korvos.com.au?subject=${encodeURIComponent(
+        subject
+      )}&body=${encodeURIComponent(body)}`;
+      setStatus("sent");
+      return;
+    }
+
+    // Key present: post in the background, no email client needed.
+    setStatus("sending");
+    try {
+      const res = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({
+          access_key: ACCESS_KEY,
+          subject,
+          from_name: "Korvos Systems website",
+          replyto: form.email,
+          name: form.name,
+          email: form.email,
+          business: form.business || "-",
+          phone: form.phone || "-",
+          message: form.message,
+        }),
+      });
+      const data = await res.json();
+      setStatus(data.success ? "sent" : "error");
+    } catch {
+      setStatus("error");
+    }
   }
 
   return (
@@ -164,7 +200,7 @@ export default function Contact() {
 
           {/* form / success */}
           <div className="mt-10">
-            {sent ? (
+            {status === "sent" ? (
               <motion.div
                 initial={reduce ? false : { opacity: 0, y: 12 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -178,15 +214,24 @@ export default function Contact() {
                   Thanks for reaching out.
                 </h2>
                 <p className="mx-auto mt-3 max-w-[46ch] font-sans text-[15px] leading-relaxed text-navy-500">
-                  Your email app should have opened with your message ready to
-                  send. If it didn't, email us directly at{" "}
+                  {HAS_KEY ? (
+                    <>
+                      Your message is on its way and we'll reply within one
+                      business day. If anything is urgent, reach us at{" "}
+                    </>
+                  ) : (
+                    <>
+                      Your email app should have opened with your message ready
+                      to send. If it didn't, email us directly at{" "}
+                    </>
+                  )}
                   <a
                     href="mailto:contact@korvos.com.au"
                     className="font-medium text-accent-text hover:underline"
                   >
                     contact@korvos.com.au
-                  </a>{" "}
-                  and we'll reply within one business day.
+                  </a>
+                  {HAS_KEY ? "." : " and we'll reply within one business day."}
                 </p>
               </motion.div>
             ) : (
@@ -220,16 +265,27 @@ export default function Contact() {
                   placeholder="Tell us how your business runs today and where the manual work piles up."
                 />
 
+                {status === "error" && (
+                  <p className="font-sans text-[14px] text-accent-text">
+                    Something went wrong sending that. Please email us directly at{" "}
+                    <a href="mailto:contact@korvos.com.au" className="font-medium underline">
+                      contact@korvos.com.au
+                    </a>
+                    .
+                  </p>
+                )}
+
                 <div className="mt-1 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
                   <motion.button
                     type="submit"
-                    whileHover={reduce ? undefined : { y: -2 }}
-                    whileTap={reduce ? undefined : { scale: 0.98 }}
+                    disabled={status === "sending"}
+                    whileHover={reduce || status === "sending" ? undefined : { y: -2 }}
+                    whileTap={reduce || status === "sending" ? undefined : { scale: 0.98 }}
                     transition={{ type: "spring", stiffness: 400, damping: 26 }}
-                    className="inline-flex items-center justify-center gap-2 rounded-full bg-navy px-6 py-3.5 font-display text-[15px] font-semibold text-white shadow-[0_10px_30px_-12px_rgba(15,30,51,0.55)] hover:bg-navy-700"
+                    className="inline-flex items-center justify-center gap-2 rounded-full bg-navy px-6 py-3.5 font-display text-[15px] font-semibold text-white shadow-[0_10px_30px_-12px_rgba(15,30,51,0.55)] hover:bg-navy-700 disabled:cursor-not-allowed disabled:opacity-70"
                   >
-                    Send message
-                    <ArrowRight weight="bold" className="h-4 w-4" />
+                    {status === "sending" ? "Sending…" : "Send message"}
+                    {status !== "sending" && <ArrowRight weight="bold" className="h-4 w-4" />}
                   </motion.button>
                   <p className="font-sans text-[13px] text-navy-300">
                     We never share your details. Replies come from

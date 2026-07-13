@@ -18,7 +18,7 @@ const svg = `
         font-size="96" font-weight="800" letter-spacing="-2" fill="#0f1e33">Korvos Systems<tspan fill="#ff5a1f">.</tspan></text>
 
   <text x="98" y="372" font-family="'Plus Jakarta Sans', Arial, sans-serif"
-        font-size="40" font-weight="600" fill="#33465f">Custom software, built around your business.</text>
+        font-size="40" font-weight="600" fill="#33465f">You&#8217;ve got a problem. We&#8217;ll build the answer.</text>
 
   <text x="98" y="470" font-family="'Inter', Arial, sans-serif"
         font-size="26" font-weight="500" fill="#556377">Every build quoted up front. You own the code. No lock-in.</text>

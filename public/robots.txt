@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://korvos-systems.vercel.app/sitemap.xml
+Sitemap: https://systems.korvos.com.au/sitemap.xml

@@ -1,3 +1,4 @@
+import { Analytics } from "@vercel/analytics/react";
 import Home from "./pages/Home.jsx";
 import Contact from "./pages/Contact.jsx";
 
@@ -9,6 +10,12 @@ export default function App() {
       ? window.location.pathname.replace(/\/+$/, "") || "/"
       : "/";
 
-  if (path === "/contact") return <Contact />;
-  return <Home />;
+  const page = path === "/contact" ? <Contact /> : <Home />;
+
+  return (
+    <>
+      {page}
+      <Analytics />
+    </>
+  );
 }

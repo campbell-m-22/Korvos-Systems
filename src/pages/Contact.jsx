@@ -17,7 +17,7 @@ const EASE = [0.16, 1, 0.3, 1];
 // Generate a free key at https://web3forms.com (enter contact@korvos.com.au as
 // the destination) and paste it below. Until it's set, the form falls back to
 // opening the visitor's email client, so nothing is broken in the meantime.
-const ACCESS_KEY = "YOUR_WEB3FORMS_ACCESS_KEY";
+const ACCESS_KEY = "99647a75-2066-409c-9ea1-63d715b42062";
 const HAS_KEY = ACCESS_KEY && !ACCESS_KEY.startsWith("YOUR_");
 
 const DETAILS = [

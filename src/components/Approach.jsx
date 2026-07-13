@@ -41,13 +41,6 @@ export default function Approach() {
                 business instead of a regulator's.
               </p>
             </Reveal>
-            <Reveal delay={0.14}>
-              <p className="mt-5 max-w-[48ch] font-sans text-[15px] leading-relaxed text-white/50">
-                We are honest about being early here: there are no client logos
-                to show yet. What we offer instead is fixed pricing, code you
-                own, and work that has to prove itself before you commit further.
-              </p>
-            </Reveal>
           </div>
         </div>
 

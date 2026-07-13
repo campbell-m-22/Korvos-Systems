@@ -1,0 +1,91 @@
+@import "tailwindcss";
+
+/* ---------------------------------------------------------------------------
+   Korvos Systems — locked brand tokens
+   Single warm light theme (brand identity locks a dull off-white surface).
+   One accent family only: bright orange, against Korvos navy.
+--------------------------------------------------------------------------- */
+@theme {
+  /* Surfaces — subtle dull off-white, very slightly warm */
+  --color-surface: #f6f2ea;
+  --color-surface-raised: #fbf8f2;
+  --color-surface-sunken: #ece5d8;
+
+  /* Korvos navy */
+  --color-navy: #0f1e33;
+  /* a shade deeper than the brand ink, for large flat section fills only */
+  --color-navy-deep: #0c1929;
+  --color-navy-700: #1a2c45;
+  --color-navy-500: #33465f;
+  /* darkened from a lighter slate so secondary text clears WCAG AA (4.5:1)
+     on the off-white surface */
+  --color-navy-300: #556377;
+
+  /* One accent family: bright orange.
+     --accent      : bright, for fills / icons / graphics / dark backgrounds
+     --accent-text : deeper burnt orange for orange TEXT on the light surface
+                     (bright orange fails WCAG AA as small text on off-white;
+                     this shade clears 5:1 and reads as the same family). */
+  --color-accent: #ff5a1f;
+  --color-accent-ink: #e04a12;
+  --color-accent-text: #b23a00;
+  --color-accent-wash: #ffe7db;
+
+  /* Hairlines */
+  --color-line: #ded4c2;
+
+  --font-display: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+
+  --radius-card: 16px;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Kinetic marquee (breadth strip). Motivated: it communicates the range of
+   things we can build. Frozen for reduced-motion users. */
+@keyframes marquee-track {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .marquee-track {
+    animation: marquee-track 48s linear infinite;
+  }
+  .marquee-group:hover .marquee-track {
+    animation-play-state: paused;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+body {
+  background-color: var(--color-surface);
+  color: var(--color-navy);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Selection uses the locked accent */
+::selection {
+  background: var(--color-accent);
+  color: #fff;
+}
+
+/* Focus ring — visible, on-brand, accessible */
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+  border-radius: 4px;
+}

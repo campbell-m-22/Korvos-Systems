@@ -24,10 +24,10 @@ const POINTS = [
 export default function Approach() {
   return (
     <section id="why-us" className="bg-navy-deep px-5 py-24 text-white sm:px-8 lg:py-32">
-      <div className="mx-auto grid max-w-[1240px] gap-14 lg:grid-cols-12">
-        {/* Left — heading block (sticky on desktop) */}
+      <div className="mx-auto grid max-w-[1240px] gap-14 lg:grid-cols-12 lg:items-center">
+        {/* Left — heading block, vertically centred against the list */}
         <div className="lg:col-span-5">
-          <div className="lg:sticky lg:top-28">
+          <div>
             <Reveal>
               <h2 className="font-display text-3xl font-bold leading-[1.08] tracking-tight sm:text-4xl lg:text-[44px]">
                 We are new as a name, not as a team.

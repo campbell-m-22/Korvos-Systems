@@ -96,9 +96,9 @@ function Cell({ cell, index }) {
     >
       {variant === "image" && (
         <>
-          {/* Pexels photo 34670920 (Pexels License, free commercial use). */}
+          {/* Client-owned one-line illustration (generated in-house). */}
           <img
-            src="/images/enquiry.jpg"
+            src="/images/enquiry.svg"
             alt=""
             aria-hidden
             loading="lazy"

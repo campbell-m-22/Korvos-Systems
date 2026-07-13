@@ -35,7 +35,7 @@ export default function Footer() {
 
         <div className="mt-12 flex flex-col justify-between gap-3 border-t border-line pt-6 sm:flex-row sm:items-center">
           <p className="font-sans text-[13.5px] text-navy-300">
-            © 2026 Korvos Systems. Australian owned and operated.
+            © 2026 Korvos Pty Ltd. ABN 49 697 208 398. Australian owned and operated.
           </p>
           <a
             href="https://korvos.com.au"

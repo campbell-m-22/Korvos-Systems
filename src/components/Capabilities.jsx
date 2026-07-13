@@ -96,12 +96,13 @@ function Cell({ cell, index }) {
     >
       {variant === "image" && (
         <>
-          {/* SWAP TARGET: real photo — an operator using a clean custom system. */}
+          {/* Pexels photo 34670920 (Pexels License, free commercial use). */}
           <img
-            src="https://picsum.photos/seed/korvos-systems-lead-capture-worksite/1200/1400"
+            src="/images/enquiry.jpg"
             alt=""
             aria-hidden
-            className="absolute inset-0 h-full w-full object-cover opacity-60 transition-transform duration-700 group-hover:scale-[1.04]"
+            loading="lazy"
+            className="absolute inset-0 h-full w-full object-cover opacity-80 transition-transform duration-700 group-hover:scale-[1.04]"
           />
           <div
             aria-hidden

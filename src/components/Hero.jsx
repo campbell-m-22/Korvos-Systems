@@ -49,7 +49,8 @@ export default function Hero() {
     <section
       id="top"
       onMouseMove={handleMove}
-      className="relative flex min-h-[90dvh] items-center overflow-hidden px-5 pb-16 pt-24 sm:px-8"
+      data-thread-behind
+      className="relative z-10 flex min-h-[90dvh] items-center overflow-hidden px-5 pb-16 pt-24 sm:px-8"
     >
       {/* Soft brand wash — layered radial, not an AI mesh blob */}
       <div

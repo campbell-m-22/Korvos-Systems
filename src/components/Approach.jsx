@@ -58,7 +58,7 @@ export default function Approach() {
                     <span className="font-display text-2xl font-extrabold text-accent">
                       {String(i + 1).padStart(2, "0")}
                     </span>
-                    <Icon weight="regular" className="h-6 w-6 text-white/50" />
+                    <Icon weight="light" className="h-6 w-6 text-white/50" />
                   </div>
                   <div>
                     <h3 className="font-display text-xl font-bold tracking-tight sm:text-2xl">

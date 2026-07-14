@@ -52,7 +52,7 @@ export default function Audience() {
               className="flex items-start gap-4 bg-surface-raised p-7 lg:p-9"
             >
               <span className="mt-0.5 flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-surface-sunken text-navy">
-                <Icon weight="regular" className="h-[22px] w-[22px]" />
+                <Icon weight="light" className="h-[22px] w-[22px]" />
               </span>
               <p className="font-sans text-[17px] leading-snug text-navy">
                 {text}

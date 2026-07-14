@@ -19,6 +19,33 @@ export function Wordmark({ className = "" }) {
   );
 }
 
+/* Hand-drawn underline — a single wobbly stroke that draws itself under a word,
+   echoing the one-line illustration style. Stretches to the word's width;
+   non-scaling-stroke keeps the ink even. Decorative. */
+export function HandUnderline({ delay = 0.9, className = "" }) {
+  const reduce = useReducedMotion();
+  return (
+    <svg
+      aria-hidden
+      viewBox="0 0 200 12"
+      preserveAspectRatio="none"
+      fill="none"
+      className={`pointer-events-none absolute -bottom-[0.16em] left-0 h-[0.34em] w-full ${className}`}
+    >
+      <motion.path
+        d="M2 7 C 28 2 52 11 80 6 S 138 1 168 8 S 194 5 198 6"
+        stroke="var(--color-accent)"
+        strokeWidth="3"
+        strokeLinecap="round"
+        vectorEffect="non-scaling-stroke"
+        initial={reduce ? false : { pathLength: 0 }}
+        animate={{ pathLength: 1 }}
+        transition={{ duration: 0.8, delay, ease: [0.16, 1, 0.3, 1] }}
+      />
+    </svg>
+  );
+}
+
 /* Scroll-reveal wrapper. Honours prefers-reduced-motion (degrades to static). */
 export function Reveal({ children, delay = 0, y = 22, className = "" }) {
   const reduce = useReducedMotion();

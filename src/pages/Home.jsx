@@ -8,10 +8,12 @@ import Approach from "../components/Approach.jsx";
 import Pricing from "../components/Pricing.jsx";
 import FinalCta from "../components/FinalCta.jsx";
 import Footer from "../components/Footer.jsx";
+import ScrollThread from "../components/ScrollThread.jsx";
 
 export default function Home() {
   return (
-    <div className="min-h-[100dvh] bg-surface">
+    <div className="relative isolate min-h-[100dvh] bg-surface">
+      <ScrollThread />
       <Nav />
       <main>
         <Hero />

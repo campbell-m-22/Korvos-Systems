@@ -119,7 +119,7 @@ function Cell({ cell, index }) {
         <span
           className={`mb-6 flex h-12 w-12 items-center justify-center rounded-full ${iconWrap[variant]}`}
         >
-          <Icon weight="regular" className="h-6 w-6" />
+          <Icon weight="light" className="h-6 w-6" />
         </span>
         <h3
           className={`font-display text-xl font-bold tracking-tight lg:text-2xl ${titleColor}`}
@@ -136,7 +136,7 @@ function Cell({ cell, index }) {
 
 export default function Capabilities() {
   return (
-    <section id="capabilities" className="px-5 py-24 sm:px-8 lg:py-32">
+    <section id="capabilities" data-thread-behind className="relative z-10 px-5 py-24 sm:px-8 lg:py-32">
       <div className="mx-auto max-w-[1240px]">
         <Reveal>
           <p className="mb-4 font-display text-[13px] font-bold uppercase tracking-[0.16em] text-accent-text">

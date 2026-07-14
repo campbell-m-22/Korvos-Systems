@@ -27,7 +27,7 @@ const SIGNS = [
 
 export default function Audience() {
   return (
-    <section className="px-5 py-24 sm:px-8 lg:py-32">
+    <section data-thread-behind className="relative z-10 px-5 py-24 sm:px-8 lg:py-32">
       <div className="mx-auto max-w-[1240px]">
         <Reveal>
           <h2 className="max-w-[18ch] font-display text-3xl font-bold leading-[1.08] tracking-tight text-navy sm:text-4xl lg:text-5xl">
